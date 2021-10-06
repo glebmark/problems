@@ -1,0 +1,38 @@
+
+def swap(arr, i, j):
+    temp = arr[i]
+    arr[i] = arr[j]
+    arr[j] = temp
+
+def partition(arr, low, high):
+    pivot = arr[low] # variant with pivot as in original algorithm
+    # pivot = arr[int((low+high)/2)] # variant with pivot as middle element
+    i = low - 1
+    j = high + 1
+    while True:
+        while True:
+            i = i + 1
+            if arr[i] >= pivot:
+                break
+
+        while True:
+            j = j - 1
+            if arr[j] <= pivot:
+                break
+
+        if i >= j:
+            return j
+
+        swap(arr, i, j)
+
+def quicksort(arr, low, high):
+    if low < high:
+        pivot = partition(arr, low, high)
+        quicksort(arr, low, pivot)
+        quicksort(arr, pivot+1, high)
+
+arr = [8, 2, 4, 1, 5]
+low = 0
+high = len(arr) - 1
+quicksort(arr, low, high)
+print(arr)
